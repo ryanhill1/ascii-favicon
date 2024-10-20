@@ -19,7 +19,7 @@ class FaviconConfig:
     text: str
     text_color: str
     background_color: str
-    favicon_dim: int = 64
+    favicon_dim: int = 16
     text_to_image_ratio: float = 2 / 3
     high_rez_scale_factor: int = 3
 
@@ -30,6 +30,7 @@ def create_image(config: FaviconConfig, image_size: tuple[int, int]) -> Image.Im
     draw = ImageDraw.Draw(high_res_image)
 
     font_size = int(image_size[0] * config.text_to_image_ratio)
+
     font = ImageFont.load_default(size=font_size)
 
     x = image_size[0] // 2
@@ -40,12 +41,15 @@ def create_image(config: FaviconConfig, image_size: tuple[int, int]) -> Image.Im
     return high_res_image
 
 
-def create_favicon_image(text: str, text_color: str, background_color: str) -> BytesIO:
-    """Create a favicon image with the given text and colors."""
+def create_favicon_image(
+    text: str, text_color: str, background_color: str, favicon_dim: int
+) -> BytesIO:
+    """Create a favicon image with the given text, colors, and size."""
     config = FaviconConfig(
         text=text,
         text_color=text_color,
         background_color=background_color,
+        favicon_dim=favicon_dim,
     )
 
     high_res_dim = config.favicon_dim * 2**config.high_rez_scale_factor
@@ -66,8 +70,9 @@ def index():
         text = request.form.get("text", "F")
         text_color = request.form.get("text_color", "white")
         background_color = request.form.get("background_color", "black")
+        favicon_dim = int(request.form.get("favicon_size", 16))
 
-        image_bytes = create_favicon_image(text, text_color, background_color)
+        image_bytes = create_favicon_image(text, text_color, background_color, favicon_dim)
 
         return send_file(
             image_bytes, mimetype="image/x-icon", as_attachment=True, download_name="favicon.ico"

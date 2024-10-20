@@ -2,37 +2,163 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Favicon Generator</title>
+    <style>
+      /* Global styles */
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* Container for the form */
+      .container {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: #2c3e50;
+      }
+
+      /* Form group styles */
+      .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        flex: 1;
+        margin-bottom: 0;
+        font-weight: bold;
+      }
+
+      .form-group input,
+      .form-group select {
+        flex: 2;
+        padding: 0.6rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 150px;
+      }
+
+      /* Specific styles for input types */
+      .form-group input[type="color"] {
+        padding: 0;
+        width: 100%;
+        height: 40px;
+        border: none;
+        margin-left: 0;
+      }
+
+      .form-group input[type="text"],
+      .form-group select {
+        max-width: 150px;
+      }
+
+      /* Submit button styles */
+      input[type="submit"] {
+        width: 100%;
+        background-color: #3498db;
+        color: white;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #2980b9;
+      }
+
+      /* Responsive design */
+      @media (max-width: 480px) {
+        .container {
+          padding: 1.5rem;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .form-group {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .form-group label,
+        .form-group input,
+        .form-group select {
+          width: 100%;
+          max-width: none;
+        }
+
+        .form-group input[type="color"] {
+          margin-top: 0.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Create Your Custom ASCII Favicon</h1>
-    <form action="/" method="post">
-      <label for="text">Text:</label>
-      <input
-        type="text"
-        id="text"
-        name="text"
-        value=""
-        maxlength="2"
-      /><br /><br />
+    <div class="container">
+      <h1>Custom ASCII Favicon</h1>
+      <form action="/" method="post">
+        <div class="form-group">
+          <label for="text">Text:</label>
+          <input type="text" id="text" name="text" value="" maxlength="2" />
+        </div>
 
-      <label for="text_color">Text Color:</label>
-      <input
-        type="color"
-        id="text_color"
-        name="text_color"
-        value="#FFFFFF"
-      /><br /><br />
+        <div class="form-group">
+          <label for="text_color">Text Color:</label>
+          <input
+            type="color"
+            id="text_color"
+            name="text_color"
+            value="#FFFFFF"
+          />
+        </div>
 
-      <label for="background_color">Background Color:</label>
-      <input
-        type="color"
-        id="background_color"
-        name="background_color"
-        value="#000000"
-      /><br /><br />
+        <div class="form-group">
+          <label for="background_color">Background Color:</label>
+          <input
+            type="color"
+            id="background_color"
+            name="background_color"
+            value="#000000"
+          />
+        </div>
 
-      <input type="submit" value="Generate Favicon" />
-    </form>
+        <div class="form-group">
+          <label for="favicon_size">Size:</label>
+          <select id="favicon_size" name="favicon_size">
+            <option value="16" selected>16x16</option>
+            <option value="32">32x32</option>
+            <option value="64">64x64</option>
+          </select>
+        </div>
+
+        <input type="submit" value="Download" />
+      </form>
+    </div>
   </body>
 </html>
